@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Process Exit Status</title>
+    <title>Process Exit Code</title>
 
     <link rel="stylesheet" href="../../statics/index.css">
     <link rel="stylesheet"
@@ -9,20 +9,19 @@
   <body>
     <div class="post-page">
       <article class="post">
-        <header>
-          <h1 class="post__title">Process Exit Status</h1>
-          <div class="post__date"></div>
+        <header class="post__header">
+          <h1 class="post__title">Process Exit Code</h1>
+          <div class="post__date">10 August 2017</div>
         </header>
 
         <div class="post__body">
           <p class="post__paragraph">
-            Small tip to make your bash shell a bit better.
+            Small tip to make your bash shell experience a bit better.
           </p>
 
           <p class="post__paragraph">
             There is a nice way to stop being confused when you run a
-            command
-            and it finishes silently.
+            command and it finishes silently.
           </p>
 
           <img
@@ -50,44 +49,95 @@
           <p class="post__paragraph">
             If you are using some popular theme for
             <a href="https://github.com/Bash-it/bash-it">Bash-it</a> you
-            probably have this solved already. If not, you're going to need <a
-            href="http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x264.html">PROMPT_COMMAND</a>
+            probably have this solved already. If not, you're going to need
+            <code class="inline-code-block">PROMPT_COMMAND</code>
             environment variable.
           </p>
 
+          <h2 class="post__section-title">How To</h2>
           <p class="post__paragraph">
-            Add this to the end of your .bash_profile.
+            Add new function to your <code class="inline-code-block">.bash_profile</code>:
           </p>
 
           <div class="post__code-block">
-            <code class="code-block hljs">
-            <pre>
-<span class="hljs-function"><span class="hljs-title">show_exit_code</span></span>() {
-    <span class="hljs-built_in">local</span> ex=$?
+            <div class="code-block">
+              <div class="code-block__title">
+                bash
+              </div>
+              <div class="code-block__code">
+              <pre><code><div class="code-block__lines-block"><span class="hljs-function"><span class="hljs-title">show_exit_code</span></span>() {
+  <span class="hljs-built_in">local</span> ex=$?
+  <span class="hljs-built_in">local</span> color_red=<span class="hljs-string">"\033[0;31m"</span>
+  <span class="hljs-built_in">local</span> color_reset=<span class="hljs-string">"\033[0m"</span>
 
-    <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$ex</span> -ne 0 ]
-    <span class="hljs-keyword">then</span>
-        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"\033[0;31m<span
-              class="hljs-variable">$ex</span>\033[0m"</span>
-    <span class="hljs-keyword">fi</span>
-}
-
-PROMPT_COMMAND=<span class="hljs-string">"show_exit_code;<span class="hljs-variable">$PROMPT_COMMAND</span>"</span>
-            </pre>
-            </code>
+  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$ex</span> -ne 0 ]
+  <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"</span><span class="hljs-variable">$color_red</span><span class="hljs-variable">$ex</span><span class="hljs-variable">$color_reset</span><span class="hljs-string">"</span>
+  <span class="hljs-keyword">fi</span>
+}</div></code></pre>
+              </div>
+            </div>
           </div>
 
-
           <p class="post__paragraph">
-            show_exit_code function saves exit code of the last executed command
-            and then writes it with a red color if the code is not zero.
+            The function saves exit code of the last executed command
+            and then writes it in red color if the code is not zero.
           </p>
 
           <p class="post__paragraph">
-            Now, open new tab in terminal or run source ~/.bash_profile and try
-            it.
+            Now add this function call into <code class="inline-code-block">PROMPT_COMMAND</code> variable
           </p>
+
+          <div class="post__code-block">
+            <div class="code-block">
+              <div class="code-block__title">
+                bash
+              </div>
+              <div class="code-block__code">
+              <pre><code><div class="code-block__lines-block"><span class="hljs-function"><span class="hljs-title">show_exit_code</span></span>() {
+  <span class="hljs-built_in">local</span> ex=$?
+  <span class="hljs-built_in">local</span> color_red=<span class="hljs-string">"\033[0;31m"</span>
+  <span class="hljs-built_in">local</span> color_reset=<span class="hljs-string">"\033[0m"</span>
+
+  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$ex</span> -ne 0 ]
+  <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">"</span><span class="hljs-variable">$color_red</span><span class="hljs-variable">$ex</span><span class="hljs-variable">$color_reset</span><span class="hljs-string">"</span>
+  <span class="hljs-keyword">fi</span>
+}</div>
+<div class="code-block__added-line"><div class="code-block__lines-block">PROMPT_COMMAND=<span class="hljs-string">"show_exit_code;<span class="hljs-variable">$PROMPT_COMMAND</span>"</span></div></div></code></pre>
+              </div>
+            </div>
+          </div>
+
+          <p class="post__paragraph">
+            Bash will execute string inside the variable like
+            a command right before displaying new prompt.
+          </p>
+
+          <p class="post__paragraph">
+            Now, open new terminal tab or re-read bash configuration with a command:
+          </p>
+
+          <div class="post__code-block">
+            <div class="code-block">
+              <div class="code-block__title">
+                bash
+              </div>
+              <div class="code-block__code">
+                <pre><code><div class="code-block__lines-block"><span class="hljs-built_in">source</span> ~/.bash_profile</div></code></pre>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <h2 class="post__section-title">Links</h2>
+
+        <ul class="post__list">
+          <li class="post__list-item"><a href="https://github.com/Bash-it/bash-it">Bash-it</a> — set of plugins, completions and themes for Bash</li>
+          <li class="post__list-item"><a href="http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x264.html">Example of using PROMPT_COMMAND</a></li>
+          <li class="post__list-item"><a href="https://github.com/nik-garmash/bash-it/blob/e2cd02bf29c186dbf4557d12b7a6960dc4c4e558/themes/bakke/bakke.theme.bash">My Bash-it theme</a></li>
+        </ul>
+
       </article>
     </div>
   </body>
