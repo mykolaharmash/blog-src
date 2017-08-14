@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs-extra": "^4.0.1",
     "highlight.js": "^9.12.0"
   }
 }
