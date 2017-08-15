@@ -1,5 +1,5 @@
 let template = require('./index-root.template')
 
-module.exports = function indexRootTemplate (props) {
+module.exports = function indexRootComponent (props) {
   return template(props)
 }

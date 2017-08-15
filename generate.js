@@ -2,6 +2,7 @@ let fs = require('fs-extra')
 
 let config = require('./config')
 let indexRoot = require('./components/index-root/index-root.component')
+let postRoot = require('./components/post-root/post-root.component')
 
 function getPostFilepath (postId, filename) {
   return `${ config.postsDir }/${ postId }/${ filename }`
@@ -19,16 +20,15 @@ function readPostMetadata (postId) {
 }
 
 function readPost (postId) {
-  let markdownPath = getPostFilepath(postId, `${ postId }.md`)
-  let hasMarkdown = fs.existsSync(markdownPath)
+  let jsPath = getPostFilepath(postId, `${ postId }.post.js`)
+  let hasJs = fs.existsSync(jsPath)
 
-  if (!hasMarkdown) {
-    throw new Error(`Post ${ postId } does not have markdown file ${ markdownPath }`)
+  if (!hasJs) {
+    throw new Error(`Post ${ postId } does not have js file ${ jsPath }`)
   }
 
   return {
-    contentType: 'markdown',
-    content: fs.readFileSync(markdownPath, 'utf8')
+    renderContent: require(jsPath)
   }
 }
 
@@ -53,22 +53,51 @@ function readPosts () {
     })
 }
 
-function generateIndex (postsList) {
+function generateIndexPage (postsList) {
   return indexRoot({ postsList })
 }
 
-function saveIndex (indexContent) {
+function saveIndexPage (indexContent) {
   fs.writeFileSync(`${ config.distDir }/index.html`, indexContent)
+}
+
+function generatePostPage (post) {
+  return postRoot(post)
+}
+
+function savePostPage (post, postPageContent) {
+  fs.writeFileSync(
+    `${ config.distDir }/posts/${ post.id }/${ post.id }.html`,
+    postPageContent
+  )
+}
+
+function copyAssets () {
+  fs.copySync(config.assetsDir, `${ config.distDir }/assets`)
+}
+
+function copyPosts () {
+  fs.copySync(config.postsDir, `${ config.distDir }/posts`)
 }
 
 function generate () {
   fs.removeSync(config.distDir)
   fs.ensureDirSync(config.distDir)
 
-  let postsList = readPosts()
-  let indexContent = generateIndex(postsList)
+  copyAssets()
+  copyPosts()
 
-  saveIndex(indexContent)
+  let postsList = readPosts()
+  let indexPageContent = generateIndexPage(postsList)
+
+  saveIndexPage(indexPageContent)
+
+  postsList.forEach((postItem) => {
+    let postPageContent = generatePostPage(postItem)
+
+    savePostPage(postItem, postPageContent)
+  })
+
 
 }
 
