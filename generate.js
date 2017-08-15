@@ -80,12 +80,16 @@ function copyPosts () {
   fs.copySync(config.postsDir, `${ config.distDir }/posts`)
 }
 
+function copyCname () {
+  fs.copySync(config.cnameFile, `${ config.distDir }/CNAME`)
+}
+
 function generate () {
-  fs.removeSync(config.distDir)
   fs.ensureDirSync(config.distDir)
 
   copyAssets()
   copyPosts()
+  copyCname()
 
   let postsList = readPosts()
   let indexPageContent = generateIndexPage(postsList)

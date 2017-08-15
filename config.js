@@ -6,7 +6,8 @@ function generateConfig () {
   return {
     distDir: path.resolve(__dirname, distDir || './dist'),
     postsDir: path.resolve(__dirname, './posts'),
-    assetsDir: path.resolve(__dirname, './assets')
+    assetsDir: path.resolve(__dirname, './assets'),
+    cnameFile: path.resolve(__dirname, './CNAME')
   }
 }
 
