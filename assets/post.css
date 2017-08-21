@@ -48,6 +48,11 @@
   margin-bottom: 34px;
 }
 
+.post__image_fullscreen {
+  width: 90%;
+  margin-bottom: 34px;
+}
+
 .post__section-header {
   width: 700px;
 }

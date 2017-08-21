@@ -26,6 +26,11 @@
   align-items: baseline;
 }
 
+.posts-list__item + .posts-list__item {
+  margin-top: 15px;
+}
+
+
 .posts-list__item-date {
   font-size: 16px;
 }
