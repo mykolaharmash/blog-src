@@ -30,7 +30,9 @@ module.exports = function postRootTemplate (props) {
     <html lang="en">
       <head>
         <title>${ title }</title>
-
+        
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet"> 
+        
         <link rel="stylesheet" href="../../assets/global.css">
         <link rel="stylesheet" href="../../assets/post.css">
         

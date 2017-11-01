@@ -9,7 +9,7 @@
 
 .post__header {
   width: 700px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .post__title {
@@ -31,14 +31,14 @@
 
 .post__paragraph {
   width: 700px;
-  margin: 0 0 18px 0;
-  line-height: 1.35;
+  margin: 0 0 30px 0;
+  line-height: 1.45;
   letter-spacing: 0.016em;
 }
 
 .post__section-title {
   width: 700px;
-  margin: 20px 0 15px 0;
+  margin: 20px 0 12px 0;
   font-size: 34px;
   font-weight: 800;
 }

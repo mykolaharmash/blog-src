@@ -5,7 +5,9 @@ module.exports = function indexRootTemplate (props) {
   return `
     <html lang="en">
       <head>
-        <title>Blog — Nikolay Garmash</title> 
+        <title>Blog — Nikolai Garmash</title> 
+        
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet"> 
         
         <link rel="stylesheet" href="./assets/global.css">
         <link rel="stylesheet" href="./assets/index.css">
@@ -16,7 +18,7 @@ module.exports = function indexRootTemplate (props) {
         
         <div class="introduction">
           <p class="introduction__paragraph">
-            Hey there! My name is Nikolay.
+            Hey there! My name is Nikolai.
           </p>
 
           <p class="introduction__paragraph">
