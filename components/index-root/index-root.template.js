@@ -5,12 +5,14 @@ module.exports = function indexRootTemplate (props) {
   return `
     <html lang="en">
       <head>
-        <title>Blog — Nikolai Garmash</title> 
+        <title>Nikolai Garmash's Blog</title> 
         
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet"> 
         
         <link rel="stylesheet" href="./assets/global.css">
         <link rel="stylesheet" href="./assets/index.css">
+        
+        <link rel="alternate" type="application/rss+xml" title="Nikolai Garmash's Blog" href="./rss.xml">
       </head>    
       
       <body>
@@ -22,8 +24,8 @@ module.exports = function indexRootTemplate (props) {
           </p>
 
           <p class="introduction__paragraph">
-            I occasionally write about front-end, design and other UI stuff in
-            general.
+            I occasionally write about frontend development, design and 
+            other UI stuff in general.
           </p>
         </div>
         

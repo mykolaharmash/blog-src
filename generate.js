@@ -84,6 +84,40 @@ function copyCname () {
   fs.copySync(config.cnameFile, `${ config.distDir }/CNAME`)
 }
 
+function generateRssItem (postItem) {
+  return `
+    <item>
+      <title>${ postItem.title }</title>
+      <author>Nikolai Garmash</author>
+      <pubDate>${ postItem.publishDate }</pubDate>
+      <guid>${ postItem.id }</guid>
+      <link>https://nikgarmash.com/posts/${ postItem.id }/${ postItem.id }.html</link>
+    </item>
+  `
+}
+
+function generateRss (postsList) {
+  const items = postsList.reduce((result, item) => {
+    return result + generateRssItem(item)
+  }, '')
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0">
+      <channel>
+        <title>Nikolai Garmash's Blog</title>
+        <description>Articles about frontend development, design and UI stuff in general</description>
+        <link>https://nikgarmash.com</link>
+        <language>en</language>
+        ${ items }
+      </channel>
+    </rss>
+  `
+}
+
+function saveRss (rssContent) {
+  fs.writeFileSync(`${ config.distDir }/rss.xml`, rssContent)
+}
+
 function generate () {
   fs.ensureDirSync(config.distDir)
 
@@ -91,13 +125,15 @@ function generate () {
   copyPosts()
   copyCname()
 
-  let postsList = readPosts()
-  let indexPageContent = generateIndexPage(postsList)
+  const postsList = readPosts()
+  const indexPageContent = generateIndexPage(postsList)
+  const rssContent = generateRss(postsList)
 
   saveIndexPage(indexPageContent)
+  saveRss(rssContent)
 
   postsList.forEach((postItem) => {
-    let postPageContent = generatePostPage(postItem)
+    const postPageContent = generatePostPage(postItem)
 
     savePostPage(postItem, postPageContent)
   })

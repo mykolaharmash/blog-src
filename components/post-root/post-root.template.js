@@ -37,6 +37,8 @@ module.exports = function postRootTemplate (props) {
         <link rel="stylesheet" href="../../assets/post.css">
         
         ${ postStyles }
+        
+        <link rel="alternate" type="application/rss+xml" title="Nikolai Garmash's Blog" href="../../rss.xml">
       </head>
       <body>
         ${ header({ withLink: true }) } 
