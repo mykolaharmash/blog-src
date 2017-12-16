@@ -1,144 +1,41 @@
-let fs = require('fs-extra')
+const fs = require('fs-extra')
+const util = require('util')
 
-let config = require('./config')
-let indexRoot = require('./components/index-root/index-root.component')
-let postRoot = require('./components/post-root/post-root.component')
+const config = require('./config')
+const renderTemplate = require('./lib/utils/render-template')
+const expandComponentsTree = require('./lib/utils/expand-components-tree')
+const serializeTree = require('./lib/utils/serialize-tree')
 
-function getPostFilepath (postId, filename) {
-  return `${ config.postsDir }/${ postId }/${ filename }`
-}
+const BlogHeader = require('./lib/components/blog-header/blog-header.component')
 
-function readPostMetadata (postId) {
-  let metadataPath = getPostFilepath(postId, `${ postId }.metadata.json`)
-  let hasMetadata = fs.existsSync(metadataPath)
-
-  if (!hasMetadata) {
-    throw new Error(`Post ${ postId } does not have metadata file ${ metadataPath }`)
+function generateIndex () {
+  const componentsMap = {
+    [BlogHeader.componentName]: BlogHeader
   }
 
-  return fs.readJSONSync(metadataPath)
+  const indexTemplate = fs.readFileSync('./index.html', 'utf8')
+  const indexHtml = renderTemplate(indexTemplate)
+  const tree = expandComponentsTree(indexHtml, componentsMap)
+  const html = serializeTree(tree)
+
+  //console.log(util.inspect(tree, { showHidden: false, depth: null }))
+
+  fs.writeFileSync(`${ config.distDir }/index.html`, html)
 }
 
-function readPost (postId) {
-  let jsPath = getPostFilepath(postId, `${ postId }.post.js`)
-  let hasJs = fs.existsSync(jsPath)
+function generateArticles () {
 
-  if (!hasJs) {
-    throw new Error(`Post ${ postId } does not have js file ${ jsPath }`)
-  }
-
-  return {
-    renderContent: require(jsPath)
-  }
 }
 
-function readPosts () {
-  let list = fs.readdirSync(config.postsDir)
-
-  return list
-    .filter((item) => {
-      let stat = fs.statSync(`${ config.postsDir }/${ item }`)
-
-      return stat.isDirectory()
-    })
-    .map((postId) => {
-      let userMetadata = readPostMetadata(postId)
-      let post = readPost(postId)
-
-      return Object.assign(
-        { id: postId },
-        userMetadata,
-        post
-      )
-    })
-}
-
-function generateIndexPage (postsList) {
-  return indexRoot({ postsList })
-}
-
-function saveIndexPage (indexContent) {
-  fs.writeFileSync(`${ config.distDir }/index.html`, indexContent)
-}
-
-function generatePostPage (post) {
-  return postRoot(post)
-}
-
-function savePostPage (post, postPageContent) {
-  fs.writeFileSync(
-    `${ config.distDir }/posts/${ post.id }/${ post.id }.html`,
-    postPageContent
+function copyComponents () {
+  fs.copySync(
+    './lib/components',
+    `${ config.distDir }${ config.componentsPublicUrl }`
   )
 }
 
-function copyAssets () {
-  fs.copySync(config.assetsDir, `${ config.distDir }/assets`)
-}
+fs.ensureDirSync(config.distDir)
 
-function copyPosts () {
-  fs.copySync(config.postsDir, `${ config.distDir }/posts`)
-}
+generateIndex()
+copyComponents()
 
-function copyCname () {
-  fs.copySync(config.cnameFile, `${ config.distDir }/CNAME`)
-}
-
-function generateRssItem (postItem) {
-  return `
-    <item>
-      <title>${ postItem.title }</title>
-      <author>Nikolai Garmash</author>
-      <pubDate>${ postItem.publishDate }</pubDate>
-      <guid>${ postItem.id }</guid>
-      <link>https://nikgarmash.com/posts/${ postItem.id }/${ postItem.id }.html</link>
-    </item>
-  `
-}
-
-function generateRss (postsList) {
-  const items = postsList.reduce((result, item) => {
-    return result + generateRssItem(item)
-  }, '')
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-    <rss version="2.0">
-      <channel>
-        <title>Nikolai Garmash's Blog</title>
-        <description>Articles about frontend development, design and UI stuff in general</description>
-        <link>https://nikgarmash.com</link>
-        <language>en</language>
-        ${ items }
-      </channel>
-    </rss>
-  `
-}
-
-function saveRss (rssContent) {
-  fs.writeFileSync(`${ config.distDir }/rss.xml`, rssContent)
-}
-
-function generate () {
-  fs.ensureDirSync(config.distDir)
-
-  copyAssets()
-  copyPosts()
-  copyCname()
-
-  const postsList = readPosts()
-  const indexPageContent = generateIndexPage(postsList)
-  const rssContent = generateRss(postsList)
-
-  saveIndexPage(indexPageContent)
-  saveRss(rssContent)
-
-  postsList.forEach((postItem) => {
-    const postPageContent = generatePostPage(postItem)
-
-    savePostPage(postItem, postPageContent)
-  })
-
-
-}
-
-generate()

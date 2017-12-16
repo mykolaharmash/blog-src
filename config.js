@@ -1,10 +1,14 @@
-let path = require('path')
-
-let distDir = process.argv.slice(2)[0]
-
 module.exports = {
-  distDir: path.resolve(__dirname, distDir || './dist'),
-  postsDir: path.resolve(__dirname, './posts'),
-  assetsDir: path.resolve(__dirname, './assets'),
-  cnameFile: path.resolve(__dirname, './CNAME')
+  // Folder in witch blog is going to be built
+  distDir: `${ process.cwd() }/dist`,
+
+  // URL which will serve raw components
+  // directory to access component's assets
+  // like styles and images
+  componentsPublicUrl: '/components',
+
+  // URL which will serve articles along with
+  // assets inside article directory (e.g. images
+  // or specific article styles)
+  articlesPublicUrl: '/articles'
 }
