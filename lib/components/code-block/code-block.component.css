@@ -1,0 +1,27 @@
+.code-block {
+  position: relative;
+  width: 768px;
+  padding: 27px 0;
+  margin-bottom: 34px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #F6F8FA;
+}
+
+.code-block__code {
+  line-height: 1.4em;
+  letter-spacing: 0.4px;
+}
+
+.code-block__line {
+  padding: 0 34px;
+}
+
+.code-block__highlighted-line {
+  display: inline-block;
+  width: 100%;
+  padding: 4px 34px;
+  box-sizing: border-box;
+  background-color: #E1E7ED;
+}
+

@@ -1,0 +1,37 @@
+<html lang="en">
+  <head>
+    <title>{{ title }}</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ description }}">
+    <meta name="author" content="{{ author }}">
+
+    <link rel="canonical" href="{{ url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ title }}" href="{{ rssUrl }}">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ globalStylesUrl }}">
+    <link rel="stylesheet" href="{{ pageStylesUrl }}">
+
+    {{ componentsStyles }}
+  </head>
+
+  <body>
+    <blog-header parent-page-type="root"></blog-header>
+
+    <div class="introduction">
+      <p class="introduction__paragraph">
+        Hey there! My name is Nikolay.
+      </p>
+      <p class="introduction__paragraph">
+        I occasionally write about frontend development, design and
+        other UI stuff in general.
+      </p>
+    </div>
+
+    <articles-list ids='{{ articleIds }}'></articles-list>
+  </body>
+</html>

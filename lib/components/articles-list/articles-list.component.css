@@ -1,0 +1,29 @@
+.articles-list {
+  width: 500px;
+  margin-top: 60px;
+}
+
+.articles-list__caption {
+  margin-bottom: 15px;
+}
+
+.articles-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.articles-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.articles-list__item + .articles-list__item {
+  margin-top: 15px;
+}
+
+
+.articles-list__item-date {
+  font-size: 16px;
+}
