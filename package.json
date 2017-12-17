@@ -11,7 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "fs-extra": "^5.0.0",
-    "hyntax": "^0.3.3"
+    "hyntax": "^0.3.3",
+    "showdown": "^1.8.5"
   },
   "private": true,
   "engines": {
