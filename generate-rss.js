@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { injectData, expandComponents } = require('site-generator')
+const { injectData, renderTemplate } = require('site-generator')
 const html = require('html-escaper')
 
 const config = require('./config')
@@ -14,14 +14,19 @@ const ITEM_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/
 const distDir = process.argv[2] || config.distDir
 
 function generateItem (articleId) {
+  const articleUrl = `${ config.url }${ config.articlesPublicUrl }/${ articleId }`
   const article = renderArticle(articleId, Object.keys(Article.componentsMap))
-  const articleHtml = expandComponents(article.html, Article.componentsMap)
+  const articleHtml = renderTemplate(
+    article.html,
+    { articleUrl },
+    Article.componentsMap
+  )
 
   return injectData(ITEM_TEMPLATE, {
     title: article.metadata.title,
     link: `${ config.url }${ config.articlesPublicUrl }/${ articleId }`,
     description: html.escape(articleHtml),
-    author: config.authorEmail,
+    author: config.author,
     guid: articleId,
     pubDate: (new Date(article.metadata.publishDate)).toUTCString(),
     sourceUrl: `${ config.url }${ config.rssPublicUrl }`

@@ -11,8 +11,7 @@ module.exports = {
   title: 'Nikolay Garmash\'s Blog',
   description: 'Articles about frontend development, design and UI stuff in general',
   url: getBlogUrl(),
-  author: 'Nikolay Garmash',
-  authorEmail: 'garmash.nikolay@gmail.com',
+  author: 'garmash.nikolay@gmail.com (Nikolay Garmash)',
 
   // Folder in witch blog is going to be built
   distDir: `${ process.cwd() }/dist`,
