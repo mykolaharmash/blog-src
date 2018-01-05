@@ -21,9 +21,9 @@ function generateItem (articleId) {
     title: article.metadata.title,
     link: `${ config.url }${ config.articlesPublicUrl }/${ articleId }`,
     description: html.escape(articleHtml),
-    author: config.author,
+    author: config.authorEmail,
     guid: articleId,
-    pubDate: article.metadata.publishDate,
+    pubDate: (new Date(article.metadata.publishDate)).toUTCString(),
     sourceUrl: `${ config.url }${ config.rssPublicUrl }`
   })
 }

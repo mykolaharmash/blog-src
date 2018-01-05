@@ -3,7 +3,7 @@
   <link>{{ link }}</link>
   <description>{{ description }}</description>
   <author>{{ author }}</author>
-  <guid>{{ guid }}</guid>
+  <guid isPermaLink="false">{{ guid }}</guid>
   <pubDate>{{ pubDate }}</pubDate>
   <source url="{{ sourceUrl }}">{{ title }}</source>
 </item>

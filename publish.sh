@@ -23,8 +23,8 @@ git clone ${GITHUB_PAGES_REPO} ${TMP_BLOG_DIR}
 # within blog directory
 rm -rf ${TMP_BLOG_DIR}/*
 
-node generate.js ${TMP_BLOG_DIR}
-node generate-rss.js ${TMP_BLOG_DIR}
+ENVIRONMENT=production node generate.js ${TMP_BLOG_DIR}
+ENVIRONMENT=production node generate-rss.js ${TMP_BLOG_DIR}
 
 cd ${TMP_BLOG_DIR}
 

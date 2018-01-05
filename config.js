@@ -1,8 +1,18 @@
+const DEV_HOST = 'localhost'
+const DEV_PORT = '8080'
+
+function getBlogUrl () {
+  return process.env.ENVIRONMENT === 'production'
+    ? 'https://nikgarmash.com'
+    : `http://${ DEV_HOST }:${ DEV_PORT }`
+}
+
 module.exports = {
   title: 'Nikolay Garmash\'s Blog',
   description: 'Articles about frontend development, design and UI stuff in general',
-  url: 'https://nikgarmash.com',
+  url: getBlogUrl(),
   author: 'Nikolay Garmash',
+  authorEmail: 'garmash.nikolay@gmail.com',
 
   // Folder in witch blog is going to be built
   distDir: `${ process.cwd() }/dist`,

@@ -23,7 +23,7 @@ Here is a side-by-side view of my IDE with old and new configuration.
 
 <article-image 
     type="fullscreen" 
-    src="./ide.png" 
+    src="{{ articleUrl }}/ide.png" 
     alt="Side-by-side view of WebStorm IDE with 12px and 16px font sizes"
 ></article-image>
 
@@ -33,13 +33,13 @@ Of course, don't forget about other text-based interfaces, like terminal and bro
 
 <article-image 
     type="fullscreen" 
-    src="./terminal.png" 
+    src="{{ articleUrl }}/terminal.png" 
     alt="Side-by-side view of iTerm 2 with 12px and 16px font sizes"
 ></article-image>
 
 <article-image 
     type="fullscreen" 
-    src="./devtools.png" 
+    src="{{ articleUrl }}/devtools.png" 
     alt="Side-by-side view of Chrome Developer Tools with 12px and 16px font sizes"
 ></article-image>
 
