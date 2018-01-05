@@ -9,6 +9,7 @@ then
 fi
 
 set -v
+set -e
 
 GITHUB_PAGES_REPO="git@github.com:nik-garmash/nik-garmash.github.io.git"
 TMP_BLOG_DIR=./tmp/blog
