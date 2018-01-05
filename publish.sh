@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-git diff-index --quiet HEAD -- || echo "Commit all the changes first"; exit 1
+git diff-index --quiet HEAD --
+
+if [ $? -ne 0 ]
+then
+    echo "Commit all changes first"
+    exit 1
+fi
 
 set -v
 
