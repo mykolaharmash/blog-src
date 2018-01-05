@@ -8,6 +8,8 @@ GITHUB_PAGES_REPO="git@github.com:nik-garmash/nik-garmash.github.io.git"
 TMP_BLOG_DIR=./tmp/blog
 BUILD_HASH=$(git rev-parse HEAD)
 
+rm -rf ${TMP_BLOG_DIR}
+
 git clone ${GITHUB_PAGES_REPO} ${TMP_BLOG_DIR}
 
 node generate.js ${TMP_BLOG_DIR}
