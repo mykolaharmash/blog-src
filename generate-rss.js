@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { injectData, renderTemplate } = require('site-generator')
+const { injectData, renderTemplate } = require('teig')
 const html = require('html-escaper')
 
 const config = require('./config')

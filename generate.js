@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const { renderTemplate } = require('site-generator')
+const { renderTemplate } = require('teig')
 
 const config = require('./config')
 const readArticlesList = require('./lib/utils/read-articles-list')
