@@ -3,7 +3,8 @@ const path = require('path')
 const { renderTemplate } = require('teig')
 
 const config = require('./config')
-const readArticlesList = require('./lib/utils/read-articles-list')
+const readArticlesList = require('./lib/helpers/read-articles-list')
+const renderCustomComponent = require('./lib/helpers/render-custom-component')
 
 const Header = require('./lib/components/header/header.component')
 const Article = require('./lib/components/article/article.component')
@@ -47,7 +48,12 @@ function renderPage (name, data, componentsMap) {
     componentsStyles
   }, data)
 
-  return renderTemplate(template, pageData, componentsMap)
+  return renderTemplate(
+    template,
+    pageData,
+    componentsMap,
+    renderCustomComponent
+  )
 }
 
 function generateIndexPage (articleIds) {

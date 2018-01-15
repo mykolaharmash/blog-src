@@ -4,8 +4,8 @@ const { injectData, renderTemplate } = require('teig')
 const html = require('html-escaper')
 
 const config = require('./config')
-const readArticlesList = require('./lib/utils/read-articles-list')
-const renderArticle = require('./lib/utils/render-article')
+const readArticlesList = require('./lib/helpers/read-articles-list')
+const renderArticle = require('./lib/helpers/render-article')
 const Article = require('./lib/components/article/article.component')
 
 const CHANNEL_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/channel.xml'), 'utf8')
