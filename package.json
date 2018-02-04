@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "generate": "node generate.js",
-    "start": "node serve.js"
+    "generate": "node ./scripts/generate.js",
+    "start": "node ./scripts/serve.js"
   },
   "keywords": [],
   "author": "Nikolay Garmash",

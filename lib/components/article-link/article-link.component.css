@@ -1,0 +1,18 @@
+.article-link:link,
+.article-link:visited {
+  padding-bottom: 0;
+  color: #0073BA;
+  text-decoration-line: underline;
+  text-decoration-color: #A9D8F5;
+}
+
+.article-link:visited {
+  color: #48AFF0;
+}
+
+.article-link:hover,
+.article-link:visited:hover {
+  color: #0084D6;
+  text-decoration-color: #0084D6;
+}
+

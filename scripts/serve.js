@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const router = express.Router({ strict: true })
 
+const CWD = process.cwd()
+
 function generate () {
   return new Promise((resolve, reject) => {
     const generate = spawn('node', [`${ __dirname }/generate.js`])
@@ -30,10 +32,10 @@ function generate () {
 function generatePage (req, res) {
   generate()
     .then(() => {
-      const articleIndex = `${ __dirname }/dist/${ req.path }/index.html`
+      const file = `${ CWD }/dist${ req.path }index.html`
 
       return new Promise((resolve, reject) => {
-        res.sendFile(articleIndex, (err) => {
+        res.sendFile(file, (err) => {
           if (err) {
             reject(err)
           }
@@ -51,7 +53,7 @@ function generatePage (req, res) {
 }
 
 router.get(['/', '/articles/:articleId/'], generatePage)
-router.use('/', express.static(`${ __dirname }/dist`))
+router.use('/', express.static(`${ CWD }/dist`))
 
 app.use('/', router)
 

@@ -1,12 +1,12 @@
 const fs = require('fs')
 const path = require('path')
-const { injectData, renderTemplate } = require('teig')
+const { injectData, renderTemplate } = require('../../teig/index')
 const html = require('html-escaper')
 
-const config = require('./config')
-const readArticlesList = require('./lib/helpers/read-articles-ids')
-const renderArticle = require('./lib/helpers/render-article')
-const Article = require('./lib/components/article/article.component')
+const config = require('../lib/config')
+const readArticlesList = require('../lib/helpers/read-articles-ids')
+const renderArticle = require('../lib/helpers/render-article')
+const Article = require('../lib/components/markdown-article/markdown-article.component')
 
 const CHANNEL_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/channel.xml'), 'utf8')
 const ITEM_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/item.xml'), 'utf8')
@@ -14,7 +14,7 @@ const ITEM_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/
 const distDir = process.argv[2] || config.distDir
 
 function generateItem (articleId) {
-  const articleUrl = `${ config.url }${ config.articlesPublicUrl }/${ articleId }`
+  const articleUrl = `${ config.blogUrl }${ config.articlesUrl }/${ articleId }`
   const article = renderArticle(articleId, Object.keys(Article.componentsMap))
   const articleHtml = renderTemplate(
     article.html,
@@ -24,12 +24,12 @@ function generateItem (articleId) {
 
   return injectData(ITEM_TEMPLATE, {
     title: article.metadata.title,
-    link: `${ config.url }${ config.articlesPublicUrl }/${ articleId }`,
+    link: `${ config.blogUrl }${ config.articlesUrl }/${ articleId }`,
     description: html.escape(articleHtml),
     author: config.author,
     guid: articleId,
     pubDate: (new Date(article.metadata.publishDate)).toUTCString(),
-    sourceUrl: `${ config.url }${ config.rssPublicUrl }`
+    sourceUrl: `${ config.blogUrl }${ config.rssUrl }`
   })
 }
 
@@ -41,12 +41,12 @@ function generate () {
   return injectData(CHANNEL_TEMPLATE, {
     title: config.title,
     description: config.description,
-    link: config.url,
+    link: config.blogUrl,
     items
   })
 }
 
 const rss = generate()
 
-fs.writeFileSync(`${ distDir }/${ config.rssPublicUrl }`, rss)
+fs.writeFileSync(`${ distDir }/${ config.rssUrl }`, rss)
 

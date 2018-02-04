@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <title>{{ title }}</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ description }}">
+    <meta name="author" content="{{ author }}">
+
+    <link rel="canonical" href="{{ pageUrl }}">
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="{{ title }}"
+      href="{{ rssUrl }}"
+    >
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,500"
+      rel="stylesheet"
+    >
+    <link
+      href="https://fonts.googleapis.com/css?family=Spectral:400,700"
+      rel="stylesheet"
+    >
+
+    {{ componentsStyles }}
+
+    <style type="text/css">
+      html {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <blog-page
+      page-id="{{ pageId }}"
+      page-data='{{ pageData }}'
+    ></blog-page>
+  </body>
+
+</html>
