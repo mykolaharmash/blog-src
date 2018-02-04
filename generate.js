@@ -1,60 +1,14 @@
 const fs = require('fs-extra')
-const path = require('path')
-const { renderTemplate } = require('teig')
 
 const config = require('./config')
-const readArticlesList = require('./lib/helpers/read-articles-list')
-const renderCustomComponent = require('./lib/helpers/render-custom-component')
+const readArticlesIds = require('./lib/helpers/read-articles-ids')
+const renderPage = require('./lib/helpers/render-page')
 
 const Header = require('./lib/components/header/header.component')
 const Article = require('./lib/components/article/article.component')
 const ArticlesList = require('./lib/components/articles-list/articles-list.component')
 
 const distDir = process.argv[2] || config.distDir
-
-function collectComponentProperty (componentsMap, propertyKey) {
-  return Object
-    .values(componentsMap)
-    .reduce((result, component) => {
-      if (component[propertyKey] !== undefined) {
-        result += component[propertyKey]
-      }
-
-      if (component.componentsMap !== undefined) {
-        result += collectComponentProperty(component.componentsMap, propertyKey)
-      }
-
-      return result
-    }, '')
-}
-
-function renderPage (name, data, componentsMap) {
-  const pageStylesUrl = `${ config.assetsPublicUrl }/pages/${ name }/${ name }.page.css`
-  const globalStylesUrl = `${ config.assetsPublicUrl }/global/global.css`
-  const template = fs.readFileSync(
-    path.join(__dirname, `./pages/${ name }/${ name }.page.html`),
-    'utf8'
-  )
-
-  const componentsStyles = collectComponentProperty(componentsMap, 'styles')
-  const pageData = Object.assign({
-    title: config.title,
-    description: config.description,
-    author: config.author,
-    url: config.url,
-    rssUrl: config.rssPublicUrl,
-    pageStylesUrl,
-    globalStylesUrl,
-    componentsStyles
-  }, data)
-
-  return renderTemplate(
-    template,
-    pageData,
-    componentsMap,
-    renderCustomComponent
-  )
-}
 
 function generateIndexPage (articleIds) {
   const componentsMap = {
@@ -115,7 +69,7 @@ fs.ensureDirSync(distDir)
 copyAssets()
 copyCname()
 
-const articleIds = readArticlesList()
+const articleIds = readArticlesIds()
 
 generateIndexPage(articleIds)
 generateArticlePages(articleIds)

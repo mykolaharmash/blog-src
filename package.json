@@ -1,10 +1,10 @@
 {
-  "name": "blog-md",
+  "name": "garmash-nikolay-blog",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "generate": "node generate.js",
-    "start": "node server.js"
+    "start": "node serve.js"
   },
   "keywords": [],
   "author": "Nikolay Garmash",

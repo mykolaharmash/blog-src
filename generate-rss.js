@@ -4,7 +4,7 @@ const { injectData, renderTemplate } = require('teig')
 const html = require('html-escaper')
 
 const config = require('./config')
-const readArticlesList = require('./lib/helpers/read-articles-list')
+const readArticlesList = require('./lib/helpers/read-articles-ids')
 const renderArticle = require('./lib/helpers/render-article')
 const Article = require('./lib/components/article/article.component')
 
