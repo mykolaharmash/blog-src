@@ -11,10 +11,17 @@
 
 .header__title,
 a.header__title {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
   font-size: 34px;
   font-weight: 800;
 }
 
+a.header__title:link,
 a.header__title:visited {
   color: #0073BA;
+  text-decoration: none;
+}
+
+a.header__title:hover {
+  color: #0084D6;
 }

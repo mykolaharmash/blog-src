@@ -13,6 +13,15 @@ function generateIndexPage () {
   fs.writeFileSync(`${ distDir }/index.html`, html)
 }
 
+function generateArchivePage () {
+  const pageUrl = `${ config.blogUrl }${ config.pagesUrl }/archive`
+  const pagePath = `${ distDir }${ config.pagesUrl }/archive`
+  const html = renderPage(Page.ARCHIVE, pageUrl)
+
+  fs.ensureDirSync(pagePath)
+  fs.writeFileSync(`${ pagePath }/index.html`, html)
+}
+
 function generateArticlePages () {
   const articleIds = readArticlesIds()
 
@@ -51,3 +60,4 @@ copyCname()
 
 generateIndexPage()
 generateArticlePages()
+generateArchivePage()

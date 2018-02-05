@@ -1,7 +1,7 @@
 ---
 title: Process Exit Status
 publishDate: August 10, 2017
-articleStyles: 
+articleStyles:
     - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css
 ---
 
@@ -18,16 +18,16 @@ the code was not zero.
 
 <article-image src="{{ articleUrl }}/now-i-see.png" alt="Showing exist code after command output"></article-image>
 
-If you are using some popular theme for <a href="https://github.com/Bash-it/bash-it">Bash-it</a> you probably have this solved already. If not, you're going to need <code class="inline-code-block">PROMPT_COMMAND</code> environment variable.
+If you are using some popular theme for [Bash-it](https://github.com/Bash-it/bash-it) you probably have this solved already. If not, you're going to need `PROMPT_COMMAND` environment variable.
 
 ## How To
 
-Add new function to your <inline-code>.bash_profile</inline-code>
+Add new function to your `.bash_profile`
 
 <code-block lang="bash">
 show_exit_code() {
     local ex=$?
-    
+ 
     if [ $ex -ne 0 ]
     then
         echo -e "\\033[0;31m$ex\\033[0m"
@@ -37,12 +37,12 @@ show_exit_code() {
 
 The function saves exit code of the last executed command and then writes it in red color if the code is not zero.
 
-Now add this function call into <inline-code>PROMPT_COMMAND</inline-code> variable
+Now add this function call into `PROMPT_COMMAND` variable
 
 <code-block lang="bash" highlight-lines="[10]">
 show_exit_code() {
     local ex=$?
-    
+ 
     if [ $ex -ne 0 ]
     then
         echo -e "\\033[0;31m$ex\\033[0m"
