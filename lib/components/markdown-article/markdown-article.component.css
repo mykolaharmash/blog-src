@@ -66,9 +66,20 @@
 
 .article__unordered-list {
   margin: 0;
+  list-style: none;
+}
+
+.article__list-item {
+  position: relative;
+  line-height: 1.4em;
+}
+
+.article__list-item:before {
+  position: absolute;
+  left: -21px;
+  content: '•';
 }
 
 .article__unordered-list > .article__list-item + .article__list-item {
-  margin-top: 7px;
-  line-height: 1.4em;
+  margin-top: 10px;
 }
