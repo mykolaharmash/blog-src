@@ -1,0 +1,45 @@
+.articles-archive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.articles-archive__title,
+.articles-archive__list {
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+}
+
+.articles-archive__year-number,
+.articles-archive__article {
+  font-family: Spectral, Georgia, serif;
+}
+
+.articles-archive__title {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
+  margin: 0 0 40px 0;
+  /* to compensate margin of the year number */
+  padding-left: 120px;
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.articles-archive__year {
+  display: flex;
+  align-items: baseline;
+}
+
+.articles-archive__year-number {
+  font-size: 22px;
+  width: 120px;
+}
+
+.articles-archive__article {
+  font-size: 24px;
+}
+
+.articles-archive__article + .articles-archive__article {
+  margin-top: 3px;
+}

@@ -52,7 +52,7 @@ function generatePage (req, res) {
     })
 }
 
-router.get(['/', '/articles/:articleId/'], generatePage)
+router.get(['/', '/articles/:articleId/', '/pages/:pageId/'], generatePage)
 router.use('/', express.static(`${ CWD }/dist`))
 
 app.use('/', router)
