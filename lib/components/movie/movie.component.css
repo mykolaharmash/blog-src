@@ -1,0 +1,44 @@
+.movie {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.movie__poster {
+  width: 100%;
+}
+
+.movie__title {
+  margin: 25px 0 6px 0;
+  font-size: 32px;
+}
+
+.movie__comment {
+  margin-top: 20px;
+}
+
+.movie__paragraph {
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+}
+
+@media (min-width: 600px) {
+  .movie {
+    flex-direction: row;
+    max-width: 680px;
+  }
+
+  .movie__poster {
+    width: 240px;
+    height: 360px;
+  }
+
+  .movie__info {
+    margin-left: 28px;
+  }
+
+  .movie__title {
+    margin-top: 0;
+  }
+}

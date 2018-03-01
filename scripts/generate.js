@@ -1,14 +1,14 @@
 const fs = require('fs-extra')
 
 const config = require('../lib/config')
-const readArticlesIds = require('../lib/helpers/read-articles-ids')
+const readContentIds = require('../lib/helpers/read-content-ids')
 const renderPage = require('../lib/helpers/render-page')
 const Page = require('../lib/components/page/page.component')
 
 const distDir = process.argv[2] || config.distDir
 
 function generateIndexPage () {
-  const html = renderPage(Page.INDEX, config.blogUrl)
+  const html = renderPage(Page.LATEST_FEED, config.blogUrl)
 
   fs.writeFileSync(`${ distDir }/index.html`, html)
 }
@@ -23,7 +23,7 @@ function generateArchivePage () {
 }
 
 function generateArticlePages () {
-  const articleIds = readArticlesIds()
+  const articleIds = readContentIds(config.articlesDir)
 
   articleIds.forEach(articleId => {
     fs.copySync(
@@ -40,6 +40,10 @@ function generateArticlePages () {
       html
     )
   })
+}
+
+function generateMoviesPage () {
+  fs.copySync(config.moviesDir, `${ distDir }${ config.moviesUrl }`)
 }
 
 function copyAssets () {
@@ -61,3 +65,4 @@ copyCname()
 generateIndexPage()
 generateArticlePages()
 generateArchivePage()
+generateMoviesPage()

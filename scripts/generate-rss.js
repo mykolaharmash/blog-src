@@ -4,8 +4,8 @@ const { injectData, renderTemplate } = require('../../teig/index')
 const html = require('html-escaper')
 
 const config = require('../lib/config')
-const readArticlesList = require('../lib/helpers/read-articles-ids')
-const renderArticle = require('../lib/helpers/render-article')
+const readContentList = require('../lib/helpers/read-content-ids')
+const renderArticle = require('../lib/helpers/render-markdown')
 const Article = require('../lib/components/markdown-article/markdown-article.component')
 
 const CHANNEL_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/channel.xml'), 'utf8')
@@ -34,7 +34,7 @@ function generateItem (articleId) {
 }
 
 function generate () {
-  const articleIds = readArticlesList()
+  const articleIds = readContentList(config.articlesDir)
 
   const items = articleIds.map(generateItem).join('\n')
 

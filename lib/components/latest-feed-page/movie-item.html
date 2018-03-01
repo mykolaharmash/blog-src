@@ -1,0 +1,13 @@
+<div class="latest-feed-page__movie-item">
+  <div class="latest-feed-page__movie-item-metadata">
+    <div class="latest-feed-page__movie-item-date">
+      <human-date date="{{ publishDate }}"></human-date>
+    </div>
+    <blog-link href="{{ moviesUrl }}">Movies</blog-link>
+    <div class="latest-feed-page__movie-verdict">{{ verdict }}</div>
+  </div>
+
+  <div class="latest-feed-page__movie-item-content">
+    <blog-movie movie-id="{{ id }}"></blog-movie>
+  </div>
+</div>

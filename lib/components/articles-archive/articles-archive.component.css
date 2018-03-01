@@ -18,7 +18,6 @@
 }
 
 .articles-archive__title {
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica, sans-serif;
   margin: 0 0 40px 0;
   /* to compensate margin of the year number */
   padding-left: 120px;
@@ -42,4 +41,18 @@
 
 .articles-archive__article + .articles-archive__article {
   margin-top: 3px;
+}
+
+@media (max-width: 700px) {
+  .articles-archive__title {
+    padding-left: 0;
+  }
+
+  .articles-archive__year {
+    flex-direction: column;
+  }
+
+  .articles-archive__year-number {
+    margin-bottom: 20px;
+  }
 }

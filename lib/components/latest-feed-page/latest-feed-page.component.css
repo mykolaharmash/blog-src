@@ -1,0 +1,45 @@
+.latest-feed-page__items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.latest-feed-page__movie-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.latest-feed-page__movie-item-metadata {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+
+.latest-feed-page__movie-item-metadata > * + * {
+  margin-left: 10px;
+}
+
+@media (min-width: 980px) {
+  .latest-feed-page__movie-item-metadata {
+    flex-direction: column;
+    align-items: flex-end;
+    width: 150px;
+    margin-right: 28px;
+    text-align: right;
+  }
+
+  .latest-feed-page__movie-item-metadata > * + * {
+    margin-left: 0;
+    margin-top: 7px;
+  }
+
+  .latest-feed-page__movie-item {
+    flex-direction: row;
+    margin-left: -178px;
+  }
+}
+
