@@ -30,8 +30,12 @@ function generate () {
 }
 
 function generatePage (req, res) {
+  const startTime = process.hrtime()
+
   generate()
     .then(() => {
+      const time = process.hrtime(startTime)
+      console.log(time[0] * 1e3 + time[1] / 1e6)
       const file = `${ CWD }/dist${ req.path }index.html`
 
       return new Promise((resolve, reject) => {

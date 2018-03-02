@@ -6,7 +6,7 @@ const html = require('html-escaper')
 const config = require('../lib/config')
 const readContentList = require('../lib/helpers/read-content-ids')
 const renderArticle = require('../lib/helpers/render-markdown')
-const Article = require('../lib/components/markdown-article/markdown-article.component')
+const Article = require('../lib/components/article-body/article-body.component')
 
 const CHANNEL_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/channel.xml'), 'utf8')
 const ITEM_TEMPLATE = fs.readFileSync(path.join(__dirname, './lib/rss-templates/item.xml'), 'utf8')

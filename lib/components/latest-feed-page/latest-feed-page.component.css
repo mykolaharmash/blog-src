@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  margin-top: 80px;
 }
 
 .latest-feed-page__movie-item {
@@ -13,18 +14,55 @@
   box-sizing: border-box;
 }
 
-.latest-feed-page__movie-item-metadata {
-  display: flex;
-  align-items: baseline;
-  margin-bottom: 18px;
+.latest-feed-page__movie-item-content {
+  margin-top: 18px;
 }
 
-.latest-feed-page__movie-item-metadata > * + * {
+.latest-feed-page__movie-item-metadata,
+.latest-feed-page__article-metadata {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  max-width: 680px;
+}
+
+
+.latest-feed-page__movie-item-metadata > * + *,
+.latest-feed-page__article-metadata > * + * {
   margin-left: 10px;
 }
 
+.latest-feed-page__article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.latest-feed-page__article-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.latest-feed-page__article-title {
+  width: 100%;
+  max-width: 680px;
+  font-size: 48px;
+  margin: 14px 0 17px 0;
+}
+
 @media (min-width: 980px) {
-  .latest-feed-page__movie-item-metadata {
+  .latest-feed-page__movie-item-content {
+    margin-top: 0;
+  }
+
+  .latest-feed-page__movie-item-metadata,
+  .latest-feed-page__article-metadata {
     flex-direction: column;
     align-items: flex-end;
     width: 150px;
@@ -32,13 +70,20 @@
     text-align: right;
   }
 
-  .latest-feed-page__movie-item-metadata > * + * {
+  .latest-feed-page__movie-item-metadata > * + *,
+  .latest-feed-page__article-metadata > * + * {
     margin-left: 0;
     margin-top: 7px;
   }
 
-  .latest-feed-page__movie-item {
+  .latest-feed-page__movie-item,
+  .latest-feed-page__article-head {
     flex-direction: row;
+    /*
+    To compensate width and margin of metadata
+    and keep main content at the center of the
+    screen
+    */
     margin-left: -178px;
   }
 }

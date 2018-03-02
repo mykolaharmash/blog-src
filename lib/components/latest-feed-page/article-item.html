@@ -1,0 +1,18 @@
+<div class="latest-feed-page__article">
+  <div class="latest-feed-page__article-head">
+    <div class="latest-feed-page__article-metadata">
+      <div class="latest-feed-page__article-date">
+        <human-date date="{{ publishDate }}"></human-date>
+      </div>
+      <blog-link href="{{ archiveUrl }}">Blog</blog-link>
+    </div>
+
+    <h1 class="latest-feed-page__article-title">
+      {{ title }}
+    </h1>
+  </div>
+
+  <div class="latest-feed-page__article-body">
+    <article-body id="{{ id }}"></article-body>
+  </div>
+</div>

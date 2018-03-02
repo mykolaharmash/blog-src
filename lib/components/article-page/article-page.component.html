@@ -1,3 +1,23 @@
-<blog-header></blog-header>
+<div class="article-page">
+  <blog-header></blog-header>
 
-<markdown-article id="{{ articleId }}"></markdown-article>
+  <article class="article-page__article">
+    <div class="article-page__head">
+      <h1 class="article-page__title">
+        {{ title }}
+      </h1>
+    </div>
+
+    <div class="article-page__body">
+      <article-body id="{{ articleId }}"></article-body>
+    </div>
+
+    <div class="article-page__metadata">
+      <div class="article-page__publish-date">
+        <human-date date="{{ publishDate }}"></human-date>
+      </div>
+    </div>
+  </article>
+
+</div>
+
