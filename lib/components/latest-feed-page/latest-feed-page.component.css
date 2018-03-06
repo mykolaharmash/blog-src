@@ -26,7 +26,6 @@
   max-width: 680px;
 }
 
-
 .latest-feed-page__movie-item-metadata > * + *,
 .latest-feed-page__article-metadata > * + * {
   margin-left: 10px;
