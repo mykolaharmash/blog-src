@@ -4,6 +4,7 @@ const config = require('../lib/config')
 const readContentIds = require('../lib/helpers/read-content-ids')
 const renderPage = require('../lib/helpers/render-page')
 const Page = require('../lib/components/page/page.component')
+const ArchivePage = require('../lib/components/archive-page/archive-page.component')
 
 const distDir = process.argv[2] || config.distDir
 
@@ -14,9 +15,9 @@ function generateIndexPage () {
 }
 
 function generateArchivePage () {
-  const pageUrl = `${ config.blogUrl }${ config.pagesUrl }/archive`
-  const pagePath = `${ distDir }${ config.pagesUrl }/archive`
-  const html = renderPage(Page.ARCHIVE, pageUrl)
+  const canonicalUrl = `${ config.blogUrl }${ ArchivePage.pageUrl }`
+  const pagePath = `${ distDir }${ ArchivePage.pageUrl }`
+  const html = renderPage(Page.ARCHIVE, canonicalUrl)
 
   fs.ensureDirSync(pagePath)
   fs.writeFileSync(`${ pagePath }/index.html`, html)
@@ -30,9 +31,9 @@ function generateArticlePages () {
       `${ config.articlesDir }/${ articleId }`,
       `${ distDir }/${ config.articlesUrl }/${ articleId }`
     )
-    const articleUrl = `${ config.blogUrl }${ config.articlesUrl }/${ articleId }`
+    const canonicalUrl = `${ config.blogUrl }${ config.articlesUrl }/${ articleId }`
 
-    const html = renderPage(Page.ARTICLE, articleUrl, { articleId })
+    const html = renderPage(Page.ARTICLE, canonicalUrl, { articleId })
 
     fs.writeFileSync(
       `${ distDir }/${ config.articlesUrl }/` +
@@ -43,7 +44,7 @@ function generateArticlePages () {
 }
 
 function generateMoviesPage () {
-  fs.copySync(config.moviesDir, `${ distDir }${ config.moviesUrl }`)
+  fs.copySync(config.moviesDir, `${ distDir }${ config.assetsUrl }/movies`)
 }
 
 function copyAssets () {

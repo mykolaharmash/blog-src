@@ -2,7 +2,7 @@
 title: The Post
 publishDate: February 27, 2018
 imdbUrl: http://www.imdb.com/title/tt6294822
-posterUrl: /movies/the-post/the-post-poster.jpg
+posterUrl: /assets/movies/the-post/the-post-poster.jpg
 posterAlt: The Post movie poster
 verdict: 👍
 ---
