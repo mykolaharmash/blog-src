@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const config = require('../lib/config')
 const readContentIds = require('../lib/helpers/read-content-ids')
 const renderPage = require('../lib/helpers/render-page')
+const generateArticleUrl = require('../lib/helpers/generate-article-url')
 const Page = require('../lib/components/page/page.component')
 const ArchivePage = require('../lib/components/archive-page/archive-page.component')
 
@@ -15,8 +16,8 @@ function generateIndexPage () {
 }
 
 function generateArchivePage () {
-  const canonicalUrl = `${ config.blogUrl }${ ArchivePage.pageUrl }`
-  const pagePath = `${ distDir }${ ArchivePage.pageUrl }`
+  const canonicalUrl = `${ config.blogUrl }${ config.pagesUrl }/archive`
+  const pagePath = `${ distDir }${ config.pagesUrl }/archive`
   const html = renderPage(Page.ARCHIVE, canonicalUrl)
 
   fs.ensureDirSync(pagePath)
@@ -31,8 +32,8 @@ function generateArticlePages () {
       `${ config.articlesDir }/${ articleId }`,
       `${ distDir }/${ config.articlesUrl }/${ articleId }`
     )
-    const canonicalUrl = `${ config.blogUrl }${ config.articlesUrl }/${ articleId }`
 
+    const canonicalUrl = generateArticleUrl(articleId)
     const html = renderPage(Page.ARTICLE, canonicalUrl, { articleId })
 
     fs.writeFileSync(
