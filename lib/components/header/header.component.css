@@ -3,12 +3,14 @@
   align-items: flex-start;
   justify-content: flex-start;
   box-sizing: border-box;
+  overflow-x: auto;
   width: 100%;
-  padding: 0 30px;
+  padding: 24px 28px;
 }
 
 .header__logo,
 a.header__logo {
+  flex-shrink: 0;
   width: 32px;
   height: 25px;
 }
@@ -23,12 +25,15 @@ a.header__logo:hover {
   color: #0084D6;
 }
 
-.header__navigation-item {
-  font-size: 18px;
+.header__navigation {
+  display: flex;
+  margin-left: 32px;
+  padding-right: 24px;
 }
 
-.header__navigation {
-  margin-left: 32px;
+.header__navigation-item {
+  font-size: 18px;
+  line-height: 18px;
 }
 
 .header__navigation-item + .header__navigation-item {
